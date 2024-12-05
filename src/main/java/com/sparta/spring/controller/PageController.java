@@ -3,7 +3,8 @@ package com.sparta.spring.controller;
 import com.sparta.spring.application.UserService;
 import com.sparta.spring.application.dtos.user.UserResponse;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,12 @@ public class PageController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<Page<UserResponse>> getUsers(PageRequest pageable) {
+    public ResponseEntity<Page<UserResponse>> getUsers(
+            @PageableDefault(
+                    size = 10,
+                    page = 0,
+                    sort = "username",
+                    direction = Sort.Direction.DESC) Pageable pageable) {
         Page<UserResponse> response = userService.getUsers(pageable);
         return ResponseEntity.ok(response);
     }

@@ -24,17 +24,15 @@ public class PersistenceService {
     @Transactional
     public void testPersistence2() {
         userRepository.findById(1)
-                .ifPresent(user -> {
-                    user.updateName("test_fix");
-                });
+                .ifPresent(user -> user.updateName("test_fix"));
     }
 
     @Transactional
     public void testPersistence3() {
         userRepository.findById(1)
-                .ifPresent(user -> {
-                    user.addArticle(Board.create(user, "test_board"));
-                });
+                .ifPresent(user -> user.addArticle(
+                        Board.create(user, "test_board")
+                ));
     }
 
     @Transactional

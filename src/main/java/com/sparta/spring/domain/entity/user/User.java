@@ -29,7 +29,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    @OneToMany(mappedBy = "writer", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "writer", cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private List<Board> articles = new ArrayList<>();
 
     @OneToMany(mappedBy = "writer")

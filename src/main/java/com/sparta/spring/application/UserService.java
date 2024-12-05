@@ -38,7 +38,6 @@ public class UserService {
     public Page<UserResponse> getUsers(Pageable pageable) {
         Page<User> user = userRepository.findByRole(UserRole.USER, pageable);
         List<UserResponse> contents = user.getContent().stream().map(UserResponse::of).toList();
-
         return new PageImpl<>(contents, pageable, user.getSize());
     }
 
